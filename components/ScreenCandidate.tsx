@@ -232,11 +232,11 @@ export default function ScreenCandidate({
                   },
                   {
                     label: "Normalized",
-                    value: `${pathologyFixture.normalizedConcept} — IHQ → IHC mapping verified`,
+                    value: `${pathologyFixture.normalizedConcept} — IHQ → IHC mapping verified — demo fixture`,
                   },
                   {
                     label: "Verification",
-                    value: "Source verified — original preserved",
+                    value: "Source verified — original preserved (demo fixture)",
                   },
                 ].map((row) => (
                   <div
