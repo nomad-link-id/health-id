@@ -1,0 +1,41 @@
+{
+  "id": "P-001",
+  "label": "Patient P-001",
+  "ageRange": "60-69",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2025-02"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Trastuzumab plus pertuzumab, first-line therapy, ongoing",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2025-03"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 3+ (HER2-positive)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2025-02"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 0",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-05"
+      }
+    ],
+    "imaging": []
+  }
+}

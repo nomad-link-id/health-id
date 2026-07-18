@@ -1,65 +1,58 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import TopBar from "@/components/TopBar";
+import ScreenCohort from "@/components/ScreenCohort";
+import ScreenCandidate from "@/components/ScreenCandidate";
+import ScreenGapResolution from "@/components/ScreenGapResolution";
+import ScreenConsent from "@/components/ScreenConsent";
+import ScreenSite from "@/components/ScreenSite";
 
 export default function Home() {
+  const [beat, setBeat] = useState(1);
+  const [proofShared, setProofShared] = useState(false);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "ArrowRight") {
+        setBeat((current) => {
+          if (current === 4 && !proofShared) return current;
+          return Math.min(current + 1, 5);
+        });
+      } else if (event.key === "ArrowLeft") {
+        setBeat((current) => Math.max(current - 1, 1));
+      } else if (event.key === "r" || event.key === "R") {
+        setBeat(1);
+        setProofShared(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [proofShared]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="flex min-h-screen flex-col bg-gray-50">
+      <TopBar
+        disclosedLabel={
+          proofShared
+            ? "1 eligibility proof shared — minimum disclosure"
+            : undefined
+        }
+      />
+      {beat === 1 && <ScreenCohort />}
+      {beat === 2 && <ScreenCandidate />}
+      {beat === 3 && <ScreenGapResolution />}
+      {beat === 4 && (
+        <ScreenConsent
+          shared={proofShared}
+          onShare={() => setProofShared(true)}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      )}
+      {beat === 5 && <ScreenSite />}
+      <footer className="border-t border-gray-200 px-10 py-4 text-xs text-gray-400">
+        Synthetic data — demo only. No treatment or coverage decisions.
+      </footer>
     </div>
   );
 }

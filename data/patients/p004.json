@@ -1,0 +1,41 @@
+{
+  "id": "P-004",
+  "label": "Patient P-004",
+  "ageRange": "40-49",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-04"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "No prior systemic therapy for metastatic disease; newly diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-04"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 1+ (HER2-low)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2026-04"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 0",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-04"
+      }
+    ],
+    "imaging": []
+  }
+}

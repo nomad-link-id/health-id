@@ -1,0 +1,41 @@
+{
+  "id": "P-006",
+  "label": "Patient P-006",
+  "ageRange": "70-79",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2025-04"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Paclitaxel, first-line therapy, 2025-05 to 2025-10, progression",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2025-10"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 1+ (HER2-low)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2025-04"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 3",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-06"
+      }
+    ],
+    "imaging": []
+  }
+}

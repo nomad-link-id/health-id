@@ -1,0 +1,41 @@
+{
+  "id": "P-005",
+  "label": "Patient P-005",
+  "ageRange": "60-69",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2025-09"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Capecitabine, most recent line, discontinuation date not documented",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2026-06"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 2+, ISH negative (HER2-low)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2025-09"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 1",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-06"
+      }
+    ],
+    "imaging": []
+  }
+}

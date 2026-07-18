@@ -1,0 +1,48 @@
+{
+  "id": "P-003",
+  "label": "Patient P-003",
+  "ageRange": "50-59",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2025-01"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Paclitaxel, first-line therapy, 2025-02 to 2025-08, progression",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2025-08"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 2+, ISH negative (HER2-low)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2025-01"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 0",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-06"
+      }
+    ],
+    "imaging": [
+      {
+        "statement": "No evidence of CNS metastases on brain MRI",
+        "sourceType": "Imaging report",
+        "sourceName": "MRI report",
+        "date": "2026-05-20"
+      }
+    ]
+  }
+}

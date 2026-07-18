@@ -1,0 +1,114 @@
+[
+  {
+    "patientId": "P-001",
+    "overall": "INELIGIBLE",
+    "failedOn": "HER2 IHC 3+"
+  },
+  {
+    "patientId": "P-002",
+    "overall": "UNKNOWN",
+    "failedOn": "Staging imaging older than 8 weeks"
+  },
+  {
+    "patientId": "P-003",
+    "overall": "LIKELY_ELIGIBLE"
+  },
+  {
+    "patientId": "P-004",
+    "overall": "INELIGIBLE",
+    "failedOn": "No prior systemic line"
+  },
+  {
+    "patientId": "P-005",
+    "overall": "UNKNOWN",
+    "failedOn": "Washout window unclear"
+  },
+  {
+    "patientId": "P-006",
+    "overall": "INELIGIBLE",
+    "failedOn": "ECOG 3"
+  },
+  {
+    "patientId": "P-007",
+    "overall": "UNKNOWN",
+    "results": [
+      {
+        "criterionId": "C01",
+        "status": "PASS",
+        "evidence": {
+          "statement": "Metastatic breast cancer diagnosed",
+          "sourceType": "Consult note",
+          "sourceName": "Oncology consult note",
+          "date": "2024-11",
+          "excerpt": "Patient is a woman in her 50s presenting with newly diagnosed metastatic breast cancer."
+        }
+      },
+      {
+        "criterionId": "C02",
+        "status": "PASS",
+        "evidence": {
+          "statement": "Bone and liver metastases identified",
+          "sourceType": "Imaging report",
+          "sourceName": "CT report",
+          "date": "2025-03",
+          "excerpt": "CT chest/abdomen/pelvis demonstrates osseous metastases and hepatic lesions consistent with metastatic breast cancer."
+        }
+      },
+      {
+        "criterionId": "C03",
+        "status": "UNKNOWN",
+        "gap": {
+          "missing": "No HER2 result found in the record",
+          "minimumNextStep": "Request or connect the latest pathology report"
+        }
+      },
+      {
+        "criterionId": "C04",
+        "status": "PASS",
+        "evidence": {
+          "statement": "Paclitaxel, first-line therapy, 2025-01 to 2025-06, discontinued for disease progression",
+          "sourceType": "Treatment summary",
+          "sourceName": "Oncology treatment summary",
+          "date": "2025-06",
+          "excerpt": "Patient completed first-line paclitaxel from January 2025 to June 2025, discontinued due to disease progression."
+        }
+      },
+      {
+        "criterionId": "C05",
+        "status": "PASS",
+        "evidence": {
+          "statement": "ECOG performance status 1",
+          "sourceType": "Consult note",
+          "sourceName": "Oncology consult note",
+          "date": "2026-06",
+          "excerpt": "ECOG performance status recorded as 1 at most recent oncology visit."
+        }
+      },
+      {
+        "criterionId": "C06",
+        "status": "PASS",
+        "evidence": {
+          "statement": "Measurable hepatic lesions consistent with metastatic disease",
+          "sourceType": "Imaging report",
+          "sourceName": "Radiology report",
+          "date": "2026-06-22",
+          "excerpt": "No CNS lesions identified. Measurable hepatic metastases noted on most recent CT."
+        }
+      }
+    ]
+  },
+  {
+    "patientId": "P-008",
+    "overall": "INELIGIBLE",
+    "failedOn": "Untreated CNS metastases"
+  },
+  {
+    "patientId": "P-009",
+    "overall": "LIKELY_ELIGIBLE"
+  },
+  {
+    "patientId": "P-010",
+    "overall": "INELIGIBLE",
+    "failedOn": "Enrolled in another interventional study"
+  }
+]

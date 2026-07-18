@@ -1,0 +1,11 @@
+{
+  "criterionId": "C03",
+  "status": "PASS",
+  "evidence": {
+    "statement": "HER2 immunohistochemistry 1+ (HER2-low)",
+    "sourceType": "Pathology report",
+    "sourceName": "External laboratory — HER2 IHC",
+    "date": "2026-05-14",
+    "excerpt": "Invasive carcinoma. HER2 IHC score: 1+ (HER2-low)."
+  }
+}

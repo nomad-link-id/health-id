@@ -1,0 +1,79 @@
+{
+  "id": "TRL-2026-BC01",
+  "title": "T-DXd in HER2-low metastatic breast cancer (synthetic)",
+  "phase": "Phase II",
+  "criteria": [
+    {
+      "id": "C01",
+      "label": "Age 18 years or older",
+      "category": "demographic",
+      "decisive": true
+    },
+    {
+      "id": "C02",
+      "label": "Confirmed metastatic breast cancer",
+      "category": "diagnosis",
+      "decisive": true
+    },
+    {
+      "id": "C03",
+      "label": "HER2-low (IHC 1+ or IHC 2+/ISH-)",
+      "category": "biomarker",
+      "decisive": true
+    },
+    {
+      "id": "C04",
+      "label": "At least one prior systemic line of therapy",
+      "category": "treatment",
+      "decisive": true
+    },
+    {
+      "id": "C05",
+      "label": "ECOG performance status 0-1",
+      "category": "demographic",
+      "decisive": true
+    },
+    {
+      "id": "C06",
+      "label": "No untreated CNS metastases",
+      "category": "safety",
+      "decisive": true
+    },
+    {
+      "id": "C07",
+      "label": "Adequate organ function",
+      "category": "safety",
+      "decisive": false
+    },
+    {
+      "id": "C08",
+      "label": "Measurable disease per RECIST 1.1",
+      "category": "diagnosis",
+      "decisive": false
+    },
+    {
+      "id": "C09",
+      "label": "No prior T-DXd exposure",
+      "category": "treatment",
+      "decisive": false
+    },
+    {
+      "id": "C10",
+      "label": "Washout period of at least 21 days since last therapy",
+      "category": "treatment",
+      "decisive": false
+    },
+    {
+      "id": "C11",
+      "label": "No active second malignancy",
+      "category": "safety",
+      "decisive": false
+    },
+    {
+      "id": "C12",
+      "label": "Able to provide informed consent",
+      "category": "other",
+      "decisive": false
+    }
+  ]
+}

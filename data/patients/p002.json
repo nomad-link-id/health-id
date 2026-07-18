@@ -1,0 +1,48 @@
+{
+  "id": "P-002",
+  "label": "Patient P-002",
+  "ageRange": "40-49",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2025-05"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Docetaxel, first-line therapy, 2025-06 to 2025-11, progression",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2025-11"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 1+ (HER2-low)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2025-05"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 1",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-04"
+      }
+    ],
+    "imaging": [
+      {
+        "statement": "Staging CT chest/abdomen/pelvis",
+        "sourceType": "Imaging report",
+        "sourceName": "CT report",
+        "date": "2026-03-01"
+      }
+    ]
+  }
+}

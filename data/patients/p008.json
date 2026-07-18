@@ -1,0 +1,54 @@
+{
+  "id": "P-008",
+  "label": "Patient P-008",
+  "ageRange": "50-59",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2025-07"
+      },
+      {
+        "statement": "Untreated brain metastases identified",
+        "sourceType": "Imaging report",
+        "sourceName": "MRI report",
+        "date": "2026-05"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Docetaxel, first-line therapy, 2025-08 to 2026-01, progression",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2026-01"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "HER2 IHC 2+, ISH negative (HER2-low)",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2025-07"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 1",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-05"
+      }
+    ],
+    "imaging": [
+      {
+        "statement": "Brain MRI showing untreated CNS metastatic lesions",
+        "sourceType": "Imaging report",
+        "sourceName": "MRI report",
+        "date": "2026-05-10"
+      }
+    ]
+  }
+}

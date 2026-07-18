@@ -1,0 +1,66 @@
+{
+  "id": "P-007",
+  "label": "Patient P-007",
+  "ageRange": "50-59",
+  "sex": "female",
+  "facts": {
+    "conditions": [
+      {
+        "statement": "Metastatic breast cancer diagnosed",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2024-11"
+      },
+      {
+        "statement": "Bone and liver metastases identified",
+        "sourceType": "Imaging report",
+        "sourceName": "CT report",
+        "date": "2025-03"
+      }
+    ],
+    "treatments": [
+      {
+        "statement": "Paclitaxel, first-line therapy, 2025-01 to 2025-06, discontinued for disease progression",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2025-06"
+      },
+      {
+        "statement": "Capecitabine, current therapy, started 2025-07",
+        "sourceType": "Treatment summary",
+        "sourceName": "Oncology treatment summary",
+        "date": "2025-07"
+      }
+    ],
+    "biomarkers": [
+      {
+        "statement": "ER positive",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2024-11"
+      },
+      {
+        "statement": "HER2 testing ordered, result not on file",
+        "sourceType": "Pathology report",
+        "sourceName": "Pathology report",
+        "date": "2024-11"
+      }
+    ],
+    "performance": [
+      {
+        "statement": "ECOG performance status 1",
+        "sourceType": "Consult note",
+        "sourceName": "Oncology consult note",
+        "date": "2026-06"
+      }
+    ],
+    "imaging": [
+      {
+        "statement": "Measurable hepatic lesions consistent with metastatic disease",
+        "sourceType": "Imaging report",
+        "sourceName": "Radiology report",
+        "date": "2026-06-22"
+      }
+    ]
+  }
+}
