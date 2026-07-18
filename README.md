@@ -19,26 +19,43 @@ shared and can revoke it.
 
 ## The 5-beat demo
 
-Keyboard-controlled: `→` advances, `←` goes back, `r` resets everything
-(including consent state).
+The demo is a sequential experience, not a static dashboard. Each beat is
+gated: you cannot advance until the on-screen action has happened. The
+single sentence it exists to prove is:
 
-1. **Cohort** — a trial is imported (12 eligibility criteria parsed) and
-   10 synthetic patient graphs are evaluated: likely eligible / eligibility
-   unknown / ineligible, with zero identifiable records disclosed.
-2. **Candidate** — drills into Patient P-007's 6 decisive criteria,
-   showing trial criterion ↔ patient graph fact ↔ original source for
-   each. One criterion (HER2 status) is an open gap: no result on file.
-3. **Gap resolution** — a tool-calling agent decides whether to search
-   external records to close the HER2 gap, retrieves the missing
-   pathology result, and re-evaluates the criterion live.
-4. **Consent** — the patient sees exactly what's requested (age range,
-   diagnosis, HER2 status, treatment lines) vs. what's withheld (full
-   chart, unrelated diagnoses), and can share an eligibility proof or
-   revoke it after the fact.
-5. **Site view** — the receiving research site sees only a consented,
-   criteria-level match: no chart, just "supported" on each decisive
-   criterion, ready for formal screening. Requesting the full record is
-   explicitly blocked as outside consent scope.
+> **The agents found the patient without exposing the patient. Then the
+> patient chose what the trial could see.**
+
+Keyboard-controlled: `→` advances (once the current beat is unlocked),
+`←` goes back, `r` resets everything (including consent state).
+
+1. **Fragmented data → patient graph** — a patient's facts are scattered
+   across a hospital EHR, an external pathology lab, a previous oncology
+   clinic, and a patient-uploaded record. `Create private patient graph`
+   links them into one source-preserving graph centered on `P-007`.
+2. **Private cohort scan** — a trial is imported (12 criteria parsed).
+   `Run private patient-graph scan` runs a visible agentic pass (parsing
+   criteria, searching graphs, verifying evidence, protecting identity),
+   then reveals 2 likely eligible / 3 eligibility unknown / 5 ineligible
+   and, prominently, **0 identifiable records disclosed**. Cards are
+   clickable with a reason; P-007 is the single highlighted candidate.
+3. **The magic moment (UNKNOWN → MATCH)** — P-007 opens on its blocking
+   gap, not a table: `ELIGIBILITY BLOCKED · 1 missing fact · HER2-low
+   status`. `Find missing evidence` triggers a tool-calling agent that
+   searches sources one by one (oncology consult → hospital EHR →
+   connected pathology → result found), surfaces the external pathology
+   proof, and animates `ELIGIBILITY UNKNOWN → LIKELY ELIGIBLE`. The
+   provenance table (criterion ↔ fact ↔ source) sits below as evidence.
+4. **Research Passport (consent wallet)** — the patient sees exactly what
+   the trial may share (age range, diagnosis, HER2 status, prior
+   treatment, contact permission) vs. what will *not* be shared (full
+   clinical notes, unrelated diagnoses, complete record), then
+   `Approve eligibility proof`. Access can be revoked after the fact.
+5. **Research site eligibility proof** — the receiving site sees only a
+   consented, criteria-level match: 12/12 supported, evidence verified,
+   patient approved contact, full record not disclosed, ready for formal
+   screening. `Request full record` is explicitly `DISCLOSURE BLOCKED` as
+   outside consent scope.
 
 ## Architecture
 
@@ -55,7 +72,8 @@ Keyboard-controlled: `→` advances, `←` goes back, `r` resets everything
   `search_external_records`. It decides whether to call it, receives the
   fixture back as a tool result, and re-evaluates the HER2 criterion,
   replying in strict JSON. The loop is capped at 3 turns with a 25s
-  timeout.
+  timeout. Beat 3 (the candidate screen) calls this route while its
+  source-by-source search animation plays.
 - **Fallback-protected** — if the API key is missing, the call errors,
   times out, or the model's reply doesn't parse as JSON, the route falls
   back to a pre-resolved fixture (`data/resolved-p007.json`) so the demo
