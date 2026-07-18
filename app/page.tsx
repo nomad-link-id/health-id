@@ -40,7 +40,9 @@ export default function Home() {
             : undefined
         }
       />
-      {beat === 1 && <ScreenCohort />}
+      {beat === 1 && (
+        <ScreenCohort onOpenCandidate={() => setBeat(2)} />
+      )}
       {beat === 2 && <ScreenCandidate />}
       {beat === 3 && <ScreenGapResolution />}
       {beat === 4 && (

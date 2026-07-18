@@ -12,7 +12,11 @@ const STATUS_LABELS: Record<string, string> = {
   INELIGIBLE: "INELIGIBLE",
 };
 
-export default function ScreenCohort() {
+interface ScreenCohortProps {
+  onOpenCandidate: () => void;
+}
+
+export default function ScreenCohort({ onOpenCandidate }: ScreenCohortProps) {
   const trial = getTrial();
   const cohort = getCohort();
 
@@ -55,9 +59,10 @@ export default function ScreenCohort() {
           return (
             <div
               key={patient.patientId}
+              onClick={isHero ? onOpenCandidate : undefined}
               className={`flex flex-col gap-3 rounded-xl border bg-white p-5 ${
                 isHero
-                  ? "ring-4 ring-offset-2 ring-blue-500 border-blue-500"
+                  ? "cursor-pointer ring-4 ring-offset-2 ring-blue-500 border-blue-500"
                   : "border-gray-200"
               }`}
             >
