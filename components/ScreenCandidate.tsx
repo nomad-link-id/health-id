@@ -6,13 +6,27 @@ import type { CriterionResult } from "@/lib/types";
 
 type Phase = "gap" | "searching" | "resolved";
 
-const SEARCH_SOURCES = [
-  { label: "Searching oncology consult…", result: "no result" },
-  { label: "Searching hospital EHR…", result: "no result" },
-  { label: "Searching connected pathology…", result: "result found" },
+interface AgentEvent {
+  step: string;
+  detail: string;
+}
+
+const SCRIPTED_TRACE: AgentEvent[] = [
+  { step: "Gap identified", detail: "C03 HER2 status missing" },
+  {
+    step: "Tool call",
+    detail:
+      "search_external_records({ patientId: 'P-007', recordType: 'pathology' })",
+  },
+  {
+    step: "Tool result",
+    detail: "Pathology report — HER2 IHC 1+ (2026-05-14, external laboratory)",
+  },
+  { step: "Re-evaluation", detail: "C03 against retrieved evidence" },
+  { step: "Decision", detail: "C03 UNKNOWN → PASS" },
 ];
 
-const STEP_DELAY_MS = 950;
+const TRACE_DELAY_MS = 600;
 
 interface ScreenCandidateProps {
   resolved: boolean;
@@ -33,7 +47,9 @@ export default function ScreenCandidate({
   const baseResults = evaluation?.results ?? [];
 
   const [phase, setPhase] = useState<Phase>(resolved ? "resolved" : "gap");
-  const [revealedSteps, setRevealedSteps] = useState(0);
+  const [trace, setTrace] = useState<AgentEvent[]>(
+    resolved ? SCRIPTED_TRACE : []
+  );
   const [c03Result, setC03Result] = useState<CriterionResult | null>(
     resolved ? resolvedResult ?? getResolvedC03() : null
   );
@@ -46,36 +62,79 @@ export default function ScreenCandidate({
     };
   }, []);
 
+  function streamTrace(
+    events: AgentEvent[],
+    index: number,
+    result: CriterionResult
+  ) {
+    if (index >= events.length) {
+      timers.current.push(
+        setTimeout(() => {
+          setC03Result(result);
+          setPhase("resolved");
+          onResolved(result);
+        }, TRACE_DELAY_MS)
+      );
+      return;
+    }
+    timers.current.push(
+      setTimeout(() => {
+        setTrace((prev) => [...prev, events[index]]);
+        streamTrace(events, index + 1, result);
+      }, TRACE_DELAY_MS)
+    );
+  }
+
   async function handleFindEvidence() {
     setPhase("searching");
-    setRevealedSteps(0);
+    setTrace([]);
 
-    SEARCH_SOURCES.forEach((_, index) => {
-      timers.current.push(
-        setTimeout(() => setRevealedSteps(index + 1), (index + 1) * STEP_DELAY_MS)
-      );
-    });
+    let data: {
+      mode?: string;
+      result?: CriterionResult;
+      events?: AgentEvent[];
+    };
+    try {
+      const response = await fetch("/api/resolve-gap", { method: "POST" });
+      data = await response.json();
+    } catch {
+      data = { mode: "fallback", result: getResolvedC03(), events: SCRIPTED_TRACE };
+    }
 
-    const fetchPromise = fetch("/api/resolve-gap", { method: "POST" })
-      .then((response) => response.json())
-      .then((data) => data.result as CriterionResult)
-      .catch(() => getResolvedC03());
+    console.log(data.mode);
 
-    const minAnimation = new Promise<void>((resolve) =>
-      timers.current.push(
-        setTimeout(resolve, SEARCH_SOURCES.length * STEP_DELAY_MS + 500)
-      )
-    );
+    const events =
+      Array.isArray(data.events) && data.events.length
+        ? data.events
+        : SCRIPTED_TRACE;
+    const result = data.result?.evidence ? data.result : getResolvedC03();
 
-    const [result] = await Promise.all([fetchPromise, minAnimation]);
-    const finalResult = result?.evidence ? result : getResolvedC03();
-
-    setC03Result(finalResult);
-    setPhase("resolved");
-    onResolved(finalResult);
+    streamTrace(events, 0, result);
   }
 
   const evidence = c03Result?.evidence;
+
+  const tracePanel = (
+    <div className="rounded-xl border border-gray-800 bg-gray-900 p-5 font-mono text-sm">
+      <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-gray-400">
+        <span className="h-2 w-2 rounded-full bg-green-400" />
+        agent trace · resolve-gap
+      </div>
+      <div className="mt-3 flex flex-col gap-1.5">
+        {trace.map((event, index) => (
+          <div key={`${event.step}-${index}`} className="rp-fade-up leading-relaxed">
+            <span className="text-green-400">▸ {event.step}:</span>{" "}
+            <span className="text-gray-100">{event.detail}</span>
+          </div>
+        ))}
+        {phase === "searching" && trace.length < SCRIPTED_TRACE.length && (
+          <div className="text-gray-500">
+            <span className="animate-pulse">▸</span> running…
+          </div>
+        )}
+      </div>
+    </div>
+  );
 
   return (
     <div className="flex flex-1 flex-col gap-8 px-16 py-10">
@@ -122,39 +181,14 @@ export default function ScreenCandidate({
             )}
           </div>
 
-          {phase === "searching" && (
-            <div className="mt-8 flex flex-col gap-3">
-              {SEARCH_SOURCES.slice(0, revealedSteps).map((source, index) => {
-                const isHit = source.result === "result found";
-                return (
-                  <div
-                    key={source.label}
-                    className="rp-fade-up flex items-center justify-between rounded-lg border border-gray-200 bg-white px-5 py-3 font-mono text-base"
-                    style={{ animationDelay: `${index * 40}ms` }}
-                  >
-                    <span className="text-gray-700">{source.label}</span>
-                    <span
-                      className={
-                        isHit
-                          ? "font-semibold text-green-600"
-                          : "text-gray-400"
-                      }
-                    >
-                      {source.result}
-                    </span>
-                  </div>
-                );
-              })}
-              {revealedSteps < SEARCH_SOURCES.length && (
-                <div className="text-sm font-medium text-gray-400">
-                  Agent querying connected sources…
-                </div>
-              )}
-            </div>
-          )}
+          {phase === "searching" && <div className="mt-8">{tracePanel}</div>}
         </div>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="flex flex-col gap-6">
+          {/* The agent trace that closed the gap */}
+          {tracePanel}
+
+          <div className="grid gap-6 md:grid-cols-2">
           {/* The proof that closed the gap */}
           {evidence && (
             <div className="rp-pop rounded-2xl border border-green-300 bg-white p-7">
@@ -201,6 +235,7 @@ export default function ScreenCandidate({
             >
               Continue to consent →
             </button>
+          </div>
           </div>
         </div>
       )}

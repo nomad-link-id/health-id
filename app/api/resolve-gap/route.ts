@@ -15,6 +15,27 @@ const MODEL = "claude-sonnet-4-6";
 const MAX_TURNS = 3;
 const TIMEOUT_MS = 25000;
 
+interface AgentEvent {
+  step: string;
+  detail: string;
+}
+
+const SCRIPTED_EVENTS: AgentEvent[] = [
+  { step: "Gap identified", detail: "C03 HER2 status missing" },
+  {
+    step: "Tool call",
+    detail:
+      "search_external_records({ patientId: 'P-007', recordType: 'pathology' })",
+  },
+  {
+    step: "Tool result",
+    detail:
+      "Pathology report — HER2 IHC 1+ (2026-05-14, external laboratory)",
+  },
+  { step: "Re-evaluation", detail: "C03 against retrieved evidence" },
+  { step: "Decision", detail: "C03 UNKNOWN → PASS" },
+];
+
 const SYSTEM_PROMPT = `You are an eligibility verification agent for a clinical trial matching system.
 
 Criterion C03 (HER2-low: IHC 1+ or IHC 2+/ISH-) has no result in the patient's record. Decide whether to call the search_external_records tool to retrieve the latest pathology report for this patient. After retrieving a result (or if you determine one cannot be retrieved), re-evaluate ONLY criterion C03.
@@ -47,6 +68,7 @@ function fallbackResponse() {
     mode: "fallback",
     result: getResolvedC03(),
     updatedOverall: "LIKELY_ELIGIBLE",
+    events: SCRIPTED_EVENTS,
   });
 }
 
@@ -93,6 +115,9 @@ export async function POST() {
 
     let toolCalled = false;
     let finalText: string | null = null;
+    const events: AgentEvent[] = [
+      { step: "Gap identified", detail: "C03 HER2 status missing" },
+    ];
 
     for (let turn = 0; turn < MAX_TURNS; turn++) {
       const response = await client.messages.create(
@@ -140,6 +165,14 @@ export async function POST() {
       if (toolUseBlock) {
         toolCalled = true;
         const fixture = getExternalPathology();
+        events.push({
+          step: "Tool call",
+          detail: `${toolUseBlock.name}(${JSON.stringify(toolUseBlock.input)})`,
+        });
+        events.push({
+          step: "Tool result",
+          detail: `${fixture.statement} (${fixture.date}, ${fixture.sourceName})`,
+        });
         messages.push({
           role: "user",
           content: [
@@ -166,11 +199,21 @@ export async function POST() {
       return fallbackResponse();
     }
 
+    events.push({
+      step: "Re-evaluation",
+      detail: "C03 against retrieved evidence",
+    });
+    events.push({
+      step: "Decision",
+      detail: `C03 UNKNOWN → ${parsed.status}`,
+    });
+
     return NextResponse.json({
       mode: "live",
       toolCalled,
       result: parsed,
       updatedOverall: "LIKELY_ELIGIBLE",
+      events,
     });
   } catch {
     return fallbackResponse();
