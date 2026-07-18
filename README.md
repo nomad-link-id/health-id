@@ -11,7 +11,6 @@ proof — so a research site is matched without ever seeing the chart.
 
 _Live demo: https://health-id-hack.vercel.app_
 
-_Demo GIF: see submission._
 
 ## Product thesis
 
