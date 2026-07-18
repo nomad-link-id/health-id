@@ -2,6 +2,9 @@ interface TopBarProps {
   disclosedLabel?: string;
   step?: number;
   totalSteps?: number;
+  onBack?: () => void;
+  onRestart?: () => void;
+  canGoBack?: boolean;
 }
 
 const STEP_LABELS = [
@@ -16,6 +19,9 @@ export default function TopBar({
   disclosedLabel = "Identifiable records disclosed: 0",
   step,
   totalSteps = STEP_LABELS.length,
+  onBack,
+  onRestart,
+  canGoBack = false,
 }: TopBarProps) {
   const proofShared = disclosedLabel !== "Identifiable records disclosed: 0";
 
@@ -29,6 +35,27 @@ export default function TopBar({
         <div className="mt-1 text-sm text-gray-500">
           Patient-controlled · Source-preserving · Minimum disclosure
         </div>
+        {(onBack || onRestart) && (
+          <div className="mt-3 flex items-center gap-2">
+            {onBack && (
+              <button
+                onClick={onBack}
+                disabled={!canGoBack}
+                className="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                ← Back
+              </button>
+            )}
+            {onRestart && (
+              <button
+                onClick={onRestart}
+                className="rounded-full border border-gray-300 px-4 py-1.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+              >
+                ↺ Start over
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {step ? (

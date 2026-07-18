@@ -66,6 +66,9 @@ export default function Home() {
             ? "1 eligibility proof shared — minimum disclosure"
             : undefined
         }
+        canGoBack={beat > 1}
+        onBack={() => setBeat((current) => Math.max(current - 1, 1))}
+        onRestart={reset}
       />
 
       {beat === 1 && (
