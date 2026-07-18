@@ -27,11 +27,11 @@ const STEP_DELAY_MS = 700;
 const NCT_ID = "NCT03734029";
 
 interface ImportedTrial {
+  mode: string;
   nctId: string;
   title: string;
   phase: string;
   sponsor: string;
-  criteria: { id: string; label: string; matchedFromRegistry: boolean }[];
 }
 
 interface ScreenCohortProps {
@@ -78,7 +78,7 @@ export default function ScreenCohort({
       const response = await fetch("/api/import-trial", { method: "POST" });
       const data = await response.json();
       console.log(data.mode);
-      setImportedTrial(data.trial as ImportedTrial);
+      setImportedTrial(data as ImportedTrial);
       setImportPhase("done");
     } catch {
       setImportPhase("idle");
@@ -111,8 +111,7 @@ export default function ScreenCohort({
             <div className="text-lg text-gray-500">{importedTrial.title}</div>
             <div className="mt-1 text-xl font-semibold text-gray-900">
               {importedTrial.nctId} · {importedTrial.phase} · imported from
-              ClinicalTrials.gov — {importedTrial.criteria.length} criteria
-              parsed
+              ClinicalTrials.gov
             </div>
           </>
         ) : (
