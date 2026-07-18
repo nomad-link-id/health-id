@@ -160,8 +160,8 @@ export default function ScreenCohort({
             <div className="mt-2 text-base text-gray-600">
               The criteria travel to each patient graph. No chart is copied, no
               record leaves the patient. This is not a SQL filter over a
-              database — it is an agent checking evidence, criterion by
-              criterion, without ever identifying anyone.
+              database — each criterion is checked against the evidence in every
+              graph, without ever identifying anyone.
             </div>
           </div>
           <button
