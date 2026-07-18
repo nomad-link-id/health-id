@@ -1,0 +1,68 @@
+{
+  "nctId": "NCT03734029",
+  "title": "Trastuzumab Deruxtecan (DS-8201a) Versus Investigator's Choice for HER2-low Breast Cancer That Has Spread or Cannot be Surgically Removed [DESTINY-Breast04]",
+  "phase": "Phase 3",
+  "sponsor": "Daiichi Sankyo",
+  "criteria": [
+    {
+      "id": "C01",
+      "label": "Is the age of majority in their country",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C02",
+      "label": "Pathologically documented unresectable or metastatic breast cancer",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C03",
+      "label": "HER2-low expression: IHC 2+/ISH- or IHC 1+ (ISH- or untested)",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C04",
+      "label": "Treated with 1 to 2 prior lines of chemotherapy in the recurrent or metastatic setting",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C05",
+      "label": "ECOG performance status 0-1",
+      "matchedFromRegistry": false
+    },
+    {
+      "id": "C06",
+      "label": "No spinal cord compression or clinically active CNS metastases",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C07",
+      "label": "Protocol-defined adequate cardiac, bone marrow, renal, hepatic, and blood clotting function",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C08",
+      "label": "At least 1 measurable lesion per RECIST 1.1",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C09",
+      "label": "No prior anti-HER2 therapy, including antibody-drug conjugates",
+      "matchedFromRegistry": true
+    },
+    {
+      "id": "C10",
+      "label": "Washout period of at least 21 days since last therapy",
+      "matchedFromRegistry": false
+    },
+    {
+      "id": "C11",
+      "label": "No active second malignancy",
+      "matchedFromRegistry": false
+    },
+    {
+      "id": "C12",
+      "label": "Able to provide informed consent",
+      "matchedFromRegistry": false
+    }
+  ]
+}

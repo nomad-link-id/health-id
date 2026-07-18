@@ -103,8 +103,7 @@ export default function Home() {
       {beat === 5 && <ScreenSite />}
 
       <footer className="border-t border-gray-200 px-10 py-4 text-xs text-gray-400">
-        Synthetic data — demo only. No treatment or coverage decisions. Use ← →
-        to move between steps, r to reset.
+        Synthetic patient data — demo only. No treatment or coverage decisions.
       </footer>
     </div>
   );

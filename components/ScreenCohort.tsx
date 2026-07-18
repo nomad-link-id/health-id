@@ -24,6 +24,16 @@ const SCAN_STEPS = [
 
 const STEP_DELAY_MS = 700;
 
+const NCT_ID = "NCT03734029";
+
+interface ImportedTrial {
+  nctId: string;
+  title: string;
+  phase: string;
+  sponsor: string;
+  criteria: { id: string; label: string; matchedFromRegistry: boolean }[];
+}
+
 interface ScreenCohortProps {
   scanned: boolean;
   onScanned: () => void;
@@ -52,10 +62,28 @@ export default function ScreenCohort({
   const [step, setStep] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
+  const [importPhase, setImportPhase] = useState<
+    "idle" | "importing" | "done"
+  >("idle");
+  const [importedTrial, setImportedTrial] = useState<ImportedTrial | null>(null);
+
   useEffect(() => {
     const pending = timers.current;
     return () => pending.forEach(clearTimeout);
   }, []);
+
+  async function handleImport() {
+    setImportPhase("importing");
+    try {
+      const response = await fetch("/api/import-trial", { method: "POST" });
+      const data = await response.json();
+      console.log(data.mode);
+      setImportedTrial(data.trial as ImportedTrial);
+      setImportPhase("done");
+    } catch {
+      setImportPhase("idle");
+    }
+  }
 
   function handleScan() {
     setPhase("scanning");
@@ -78,9 +106,49 @@ export default function ScreenCohort({
   return (
     <div className="flex flex-1 flex-col gap-8 px-16 py-10">
       <div>
-        <div className="text-lg text-gray-500">{trial.title}</div>
-        <div className="mt-1 text-xl font-semibold text-gray-900">
-          Trial imported — {trial.criteria.length} eligibility criteria parsed
+        {importedTrial ? (
+          <>
+            <div className="text-lg text-gray-500">{importedTrial.title}</div>
+            <div className="mt-1 text-xl font-semibold text-gray-900">
+              {importedTrial.nctId} · {importedTrial.phase} · imported from
+              ClinicalTrials.gov — {importedTrial.criteria.length} criteria
+              parsed
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="text-lg text-gray-500">{trial.title}</div>
+            <div className="mt-1 text-xl font-semibold text-gray-900">
+              Trial imported — {trial.criteria.length} eligibility criteria
+              parsed
+            </div>
+          </>
+        )}
+
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <input
+            readOnly
+            value={NCT_ID}
+            aria-label="ClinicalTrials.gov identifier"
+            className="w-40 rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 font-mono text-base text-gray-700"
+          />
+          <button
+            onClick={handleImport}
+            disabled={importPhase === "importing" || importPhase === "done"}
+            className="rounded-full bg-gray-900 px-5 py-2 text-base font-semibold text-white transition-colors hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Import from ClinicalTrials.gov
+          </button>
+          {importPhase === "importing" && (
+            <span className="text-base font-medium text-gray-500">
+              Trial Parser Agent — parsing eligibility criteria…
+            </span>
+          )}
+          {importPhase === "done" && (
+            <span className="text-base font-medium text-green-600">
+              ✓ imported
+            </span>
+          )}
         </div>
       </div>
 
