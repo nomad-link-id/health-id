@@ -38,7 +38,8 @@ export default function ScreenConsent({
           Your Health ID
         </div>
         <div className="mt-2 max-w-2xl text-base text-gray-600">
-          You matched a study. You decide what the trial is allowed to see.
+          You may match this study. You decide what the research site is
+          allowed to see.
         </div>
       </div>
 

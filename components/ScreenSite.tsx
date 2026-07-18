@@ -22,7 +22,7 @@ export default function ScreenSite() {
         <div className="flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-8">
           <div className="flex items-baseline justify-between">
             <div className="text-xl font-bold text-gray-900">
-              Eligibility proof — Patient P-007
+              Eligibility proof — Pseudonymous candidate P-007
             </div>
             <div className="rounded-full bg-green-600 px-4 py-1 text-sm font-semibold text-white">
               {totalCriteria}/{totalCriteria} criteria supported
