@@ -9,7 +9,7 @@ proof — so a research site is matched without ever seeing the chart.
 
 ## Demo
 
-_Live demo: link to be added for the submission._
+_Live demo: https://health-id-hack.vercel.app_
 
 _Demo GIF: see submission._
 
