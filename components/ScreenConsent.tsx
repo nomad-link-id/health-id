@@ -43,6 +43,24 @@ export default function ScreenConsent({
       </div>
 
       <div className="flex max-w-3xl flex-col gap-8 rounded-2xl border border-gray-200 bg-white p-8">
+        <div className="rounded-xl border border-gray-200 bg-gray-50 p-5">
+          <div className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Connected sources
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm font-medium text-gray-700">
+              US oncology EHR
+            </span>
+            <span className="text-gray-400">·</span>
+            <span className="rounded-full border border-gray-300 bg-white px-3 py-1 text-sm font-medium text-gray-700">
+              Pathology laboratory — Brazil
+            </span>
+          </div>
+          <div className="mt-3 text-base text-gray-600">
+            A pathology result from Brazil supports the required biomarker.
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <div className="text-sm font-semibold uppercase tracking-wide text-gray-500">

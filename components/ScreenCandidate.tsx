@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { getCohort, getResolvedC03, getTrial } from "@/lib/data";
+import pathologyFixture from "@/data/external/pathology-p007.json";
 import type { CriterionResult } from "@/lib/types";
 
 type Phase = "gap" | "searching" | "resolved";
@@ -217,6 +218,46 @@ export default function ScreenCandidate({
                   “{evidence.excerpt}”
                 </div>
               )}
+
+              {/* Source-preserving cross-border proof (from the fixture) */}
+              <div className="mt-5 flex flex-col gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4">
+                {[
+                  {
+                    label: "Original source",
+                    value: `${pathologyFixture.sourceInstitutionType} — ${pathologyFixture.sourceCountry}`,
+                  },
+                  {
+                    label: "Original text",
+                    value: `“${pathologyFixture.originalText}” (${pathologyFixture.originalLanguage})`,
+                  },
+                  {
+                    label: "Normalized",
+                    value: `${pathologyFixture.normalizedConcept} — IHQ → IHC mapping verified`,
+                  },
+                  {
+                    label: "Verification",
+                    value: "Source verified — original preserved",
+                  },
+                ].map((row) => (
+                  <div
+                    key={row.label}
+                    className="grid grid-cols-[7.5rem_1fr] items-start gap-3"
+                  >
+                    <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                      {row.label}
+                    </div>
+                    <div className="text-sm text-gray-800">{row.value}</div>
+                  </div>
+                ))}
+                <div className="grid grid-cols-[7.5rem_1fr] items-start gap-3 border-t border-gray-200 pt-3">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                    Effect
+                  </div>
+                  <div className="text-sm font-semibold text-green-600">
+                    C03 UNKNOWN → PASS
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 

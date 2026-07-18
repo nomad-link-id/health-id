@@ -3,5 +3,11 @@
   "sourceType": "Pathology report",
   "sourceName": "External laboratory — HER2 IHC",
   "date": "2026-05-14",
-  "excerpt": "Invasive carcinoma. HER2 IHC score: 1+ (HER2-low)."
+  "excerpt": "Invasive carcinoma. HER2 IHC score: 1+ (HER2-low).",
+  "sourceCountry": "Brazil",
+  "sourceInstitutionType": "Pathology laboratory",
+  "originalLanguage": "Portuguese",
+  "originalText": "HER2: IHQ 1+",
+  "normalizedConcept": "HER2 IHC 1+",
+  "mappingStatus": "Terminology mapping verified (IHQ -> IHC)"
 }

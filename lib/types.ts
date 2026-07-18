@@ -37,6 +37,12 @@ export interface Trial {
 
 export interface Evidence extends Fact {
   excerpt: string;
+  sourceCountry?: string;
+  sourceInstitutionType?: string;
+  originalLanguage?: string;
+  originalText?: string;
+  normalizedConcept?: string;
+  mappingStatus?: string;
 }
 
 export interface CriterionResult {
