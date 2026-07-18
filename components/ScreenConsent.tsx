@@ -35,7 +35,7 @@ export default function ScreenConsent({
       <div>
         <div className="text-lg text-gray-500">Patient wallet</div>
         <div className="mt-1 text-3xl font-bold text-gray-900">
-          Your Research Passport
+          Your Health ID
         </div>
         <div className="mt-2 max-w-2xl text-base text-gray-600">
           You matched a study. You decide what the trial is allowed to see.

@@ -23,8 +23,9 @@ export default function TopBar({
     <div className="flex items-center justify-between border-b border-gray-200 bg-white px-10 py-5">
       <div>
         <div className="text-2xl font-bold tracking-tight text-gray-900">
-          RESEARCH PASSPORT
+          HEALTH ID
         </div>
+        <div className="text-xs text-gray-400">Your data. Your life.</div>
         <div className="mt-1 text-sm text-gray-500">
           Patient-controlled · Source-preserving · Minimum disclosure
         </div>

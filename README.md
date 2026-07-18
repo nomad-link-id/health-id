@@ -1,12 +1,12 @@
-# Research Passport
+# Health ID
 
 A patient-controlled clinical trial matching demo.
 
 ## What it is
 
 Trial matching today moves records to pharma: a patient's full chart gets
-shipped somewhere to be checked against eligibility criteria. Research
-Passport inverts that. Trial criteria come to the patient's **Patient
+shipped somewhere to be checked against eligibility criteria. Health ID
+inverts that. Trial criteria come to the patient's **Patient
 Graph** — a structured, source-preserving summary of their own facts — and
 only the minimum disclosure needed to prove eligibility ever leaves the
 patient's control.
@@ -46,7 +46,7 @@ Keyboard-controlled: `→` advances (once the current beat is unlocked),
    connected pathology → result found), surfaces the external pathology
    proof, and animates `ELIGIBILITY UNKNOWN → LIKELY ELIGIBLE`. The
    provenance table (criterion ↔ fact ↔ source) sits below as evidence.
-4. **Research Passport (consent wallet)** — the patient sees exactly what
+4. **Health ID (consent wallet)** — the patient sees exactly what
    the trial may share (age range, diagnosis, HER2 status, prior
    treatment, contact permission) vs. what will *not* be shared (full
    clinical notes, unrelated diagnoses, complete record), then
