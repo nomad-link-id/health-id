@@ -143,7 +143,7 @@ export default function ScreenCandidate({
         <div>
           <div className="text-lg text-gray-500">Candidate detail</div>
           <div className="mt-1 text-2xl font-bold text-gray-900">
-            Patient P-007
+            Pseudonymous candidate P-007
           </div>
         </div>
         <div className="text-sm text-gray-500">
