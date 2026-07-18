@@ -108,7 +108,12 @@ export default function ScreenCohort({
       <div>
         {importedTrial ? (
           <>
-            <div className="text-lg text-gray-500">{importedTrial.title}</div>
+            <div
+              className="line-clamp-2 max-w-4xl text-lg text-gray-500"
+              title={importedTrial.title}
+            >
+              {importedTrial.title}
+            </div>
             <div className="mt-1 text-xl font-semibold text-gray-900">
               {importedTrial.nctId} · {importedTrial.phase} · imported from
               ClinicalTrials.gov
